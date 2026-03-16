@@ -69,6 +69,19 @@ def parse_args() -> argparse.Namespace:
         help="Enable 4-bit quantization (reduces VRAM usage)",
     )
     parser.add_argument(
+        "--backend",
+        type=str,
+        default=None,
+        choices=["transformers", "llama_cpp"],
+        help="LLM backend: 'transformers' (HuggingFace) or 'llama_cpp' (GGUF)",
+    )
+    parser.add_argument(
+        "--gguf",
+        type=str,
+        default=None,
+        help="Path to a .gguf model file (implies --backend llama_cpp)",
+    )
+    parser.add_argument(
         "--share",
         action="store_true",
         help="Create a public Gradio share link",
@@ -101,6 +114,11 @@ def main():
         llm_config["model_name"] = args.model
     if args.quantize:
         llm_config["quantize"] = True
+    if args.backend:
+        llm_config["backend"] = args.backend
+    if args.gguf:
+        llm_config["backend"] = "llama_cpp"
+        llm_config["gguf_model_path"] = args.gguf
 
     ui_config = config.get("ui", {})
     if args.share:
