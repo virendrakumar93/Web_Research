@@ -1,0 +1,54 @@
+# =============================================================================
+# Multi-Agent Research Assistant Configuration
+# =============================================================================
+
+# LLM Settings
+llm:
+  # Choose from: meta-llama/Meta-Llama-3-8B-Instruct,
+  #              mistralai/Mistral-7B-Instruct-v0.3,
+  #              microsoft/Phi-3-mini-4k-instruct
+  model_name: "microsoft/Phi-3-mini-4k-instruct"
+  temperature: 0.7
+  max_tokens: 1024
+  # Enable 4-bit quantization to reduce VRAM usage (requires bitsandbytes)
+  quantize: false
+  device_map: "auto"
+
+# Search Settings
+search:
+  # Maximum number of search results per query
+  max_results: 5
+  # DuckDuckGo region (e.g., wt-wt for worldwide)
+  region: "wt-wt"
+  # Safe search: on, moderate, off
+  safesearch: "moderate"
+
+# Scraper Settings
+scraper:
+  # Timeout in seconds for HTTP requests
+  timeout: 15
+  # Maximum content length in characters to process per page
+  max_content_length: 10000
+  # User-Agent header for requests
+  user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# Text Processing
+text:
+  # Chunk size for splitting long documents before LLM processing
+  chunk_size: 2000
+  chunk_overlap: 200
+
+# Research Settings
+research:
+  # Maximum number of search queries to generate per research prompt
+  max_queries: 3
+  # Maximum number of URLs to scrape per query
+  max_urls_per_query: 3
+  # Maximum total sources to include in final output
+  max_sources: 10
+
+# Gradio UI Settings
+ui:
+  server_name: "0.0.0.0"
+  server_port: 7860
+  share: false
