@@ -68,6 +68,16 @@ The pipeline is orchestrated by **LangGraph**, which manages state flow between 
 | `mistralai/Mistral-7B-Instruct-v0.3` | 7B | Good balance of quality and speed |
 | `meta-llama/Meta-Llama-3-8B-Instruct` | 8B | Best quality — requires HF token and license acceptance |
 
+### GGUF Models (llama_cpp backend)
+
+For faster startup and lower memory usage, you can use pre-quantized GGUF models:
+
+| Model | Size | Download |
+|-------|------|----------|
+| Phi-3-mini Q4 | ~2 GB | [HuggingFace](https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf) |
+| Mistral-7B Q4_K_M | ~4 GB | [HuggingFace](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF) |
+| Llama-3-8B Q4_K_M | ~4.5 GB | [HuggingFace](https://huggingface.co/QuantFactory/Meta-Llama-3-8B-Instruct-GGUF) |
+
 ## Installation
 
 ### Prerequisites
@@ -121,6 +131,13 @@ python app.py --quantize
 
 ```bash
 python app.py --share
+```
+
+### Use a GGUF model (lightweight, CPU-friendly)
+
+```bash
+pip install llama-cpp-python
+python app.py --gguf ./models/Phi-3-mini-4k-instruct-q4.gguf
 ```
 
 ### Custom port

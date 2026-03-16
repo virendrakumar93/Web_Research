@@ -4,15 +4,27 @@
 
 # LLM Settings
 llm:
+  # Backend: "transformers" (full HuggingFace) or "llama_cpp" (GGUF, lighter)
+  backend: "transformers"
+
+  # --- Transformers backend settings ---
   # Choose from: meta-llama/Meta-Llama-3-8B-Instruct,
   #              mistralai/Mistral-7B-Instruct-v0.3,
   #              microsoft/Phi-3-mini-4k-instruct
   model_name: "microsoft/Phi-3-mini-4k-instruct"
-  temperature: 0.7
-  max_tokens: 1024
-  # Enable 4-bit quantization to reduce VRAM usage (requires bitsandbytes)
+  # Enable 4-bit quantization to reduce VRAM usage (requires bitsandbytes + CUDA)
   quantize: false
   device_map: "auto"
+
+  # --- llama_cpp backend settings ---
+  # Path to a local .gguf model file (required when backend is "llama_cpp")
+  gguf_model_path: ""
+  # Context window size for GGUF models
+  n_ctx: 4096
+
+  # --- Shared generation settings ---
+  temperature: 0.7
+  max_tokens: 1024
 
 # Search Settings
 search:
